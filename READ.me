@@ -1,0 +1,26 @@
+API used :
+    1. getFreeSlots (GET)
+    2. registerEvent (POST)
+    3. getEventList (GET)
+
+Firebase DB Queries methods :
+    1. let appointmentRef = db.getCollection("appointment");
+       let docRef = await appointmentRef.doc(date);
+       docRef.get()
+
+    2. let appointmentRef = db.getCollection("appointment");
+       let docRef = await appointmentRef.doc(date);
+       docRef.update({scheduled: arrayUnion()});
+
+    Example for Update data :
+        const data = {
+            'scheduled':[{
+                email: body.email,
+                name: body.name,
+                phone: body.phone,
+                startTime: startTime
+            }],
+            'timezone': body.timeZone
+        };
+
+

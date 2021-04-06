@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Events</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="./js/common.js"></script>
+</head>
+
+<script>
+    $(document).ready(function(){
+      var date = getParamValue("date");
+      var timezone = getParamValue("timezone");
+      var url = `/getFreeSlots?date=${date}&timezone=${timezone}`;
+      console.log(url)
+      $.ajax({url: url, success: function(result){
+        console.log("::::::::::::::::", result);
+        if (result["slots"]) {
+          var slots = result["slots"];
+          for (var i in slots) {
+            if (slots[i]["isScheduled"] == true) {
+              var tArr = slots[i]["st"].split(":");
+              var t =`${tArr[0]}:${tArr[1]} ${(tArr[0] >= 12) ? "PM" : "AM"}`
+              $(".slotGroup").append(`<a href="#" class="list-group-item disabled">${t} - (Booked)</a>`);
+            } else {
+              var tArr = slots[i]["st"].split(":");
+              var t =`${tArr[0]}:${tArr[1]} ${(tArr[0] >= 12) ? "PM" : "AM"}`
+              $(".slotGroup").append(`<a href="#" class="list-group-item selectSlot">${t}</a>`);
+            }
+            
+          }
+        }
+        
+      }});
+    });
+</script>
+
+<body>
+
+  <div class="container" align="center">
+    <h2>Free Slot List Group</h2>
+    <div class="list-group slotGroup" style="width:100px" >
+      
+    </div>
+  </div>
+
+</body>
+</html>

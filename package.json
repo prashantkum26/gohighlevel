@@ -1,0 +1,25 @@
+{
+  "name": "gohighlevel",
+  "version": "1.0.0",
+  "description": "This Project for Testing",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "NA"
+  },
+  "keywords": [
+    "NA"
+  ],
+  "author": "Prashant Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.6.0"
+  }
+}

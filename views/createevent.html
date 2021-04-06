@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Events</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="./js/common.js"></script>
+</head>
+
+<script>
+    $(document).ready(function(){
+      var date = getParamValue("date");
+      var timezone = getParamValue("timezone");
+      var time = getParamValue("time");
+
+      $("#selectedSlot").val(`Date: ${date} :: Time: ${time} :: Timezone: ${timezone}`);
+      
+      $("#registerEvent").click(function () {
+          let name = $("#name").val();
+          let phone = $("#phone").val();
+          let email = $("#email").val();
+          if (name.replace(/\s+/g, '') != "" && phone.replace(/\s+/g, '') != "" && email.replace(/\s+/g, '') != "") {
+            var url = `/registerEvent?date=${date}&timezone=${timezone}`;
+            var data = {
+                name: name,
+                email: email,
+                phone: phone,
+                date: date,
+                timeZone: timezone,
+                selectedSlot: time
+            };
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                success: function ( result ) {
+                    console.log( " Result :: ", result )
+                    if (result["status"] == "success") {
+                      alert("Successfully Registered.");
+                    } else {
+                      alert("Registeration failed.");
+                    }
+
+                    if (window.confirm('Go to Home Page.')){
+                          // They clicked Yes
+                          window.location = "/";
+                    } else {
+                          // They clicked no
+                          window.location = "/";
+                    }
+                    
+                },
+                // dataType: dataType
+            });
+          } else {
+              alert("Please enter all details properly.")
+          }
+      });
+
+    });
+</script>
+
+<body>
+
+  <div class="container">
+    <h2>Create Event</h2>
+    
+
+    <form>
+        <div class="form-group">
+            <label for="selectedSlot">Selected Slot</label>
+            <input type="text" disabled readonly class="form-control" id="selectedSlot" aria-describedby="emailHelp" placeholder="Slot">
+        </div>
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" maxlength="15" class="form-control" id="phone" placeholder="Enter phone Number">
+        </div>
+        
+        <button type="button" id="registerEvent" class="btn btn-primary">Create Event</button>
+    </form>
+
+  </div>
+
+</body>
+</html>
