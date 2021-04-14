@@ -1,4 +1,4 @@
-exports.port = "3000";
+exports.port = process.env.PORT || 3000;
 exports.mongoUrl = 'mongodb://localhost/rest-crud';
 exports.serviceAccount = "firebase-adminsdk-e6090@web-dev-233517.iam.gserviceaccount.com";
 
