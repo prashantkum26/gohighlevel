@@ -4,7 +4,8 @@
   "description": "This Project for Testing",
   "main": "server.js",
   "scripts": {
-    "test": "node server"
+    "test": "node server",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
