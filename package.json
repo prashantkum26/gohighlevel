@@ -4,7 +4,7 @@
   "description": "This Project for Testing",
   "main": "server.js",
   "scripts": {
-    "test": "node server",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
   "repository": {
